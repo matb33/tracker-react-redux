@@ -10,7 +10,8 @@
     "dist/createTrackerReduxContainer.js"
   ],
   "scripts": {
-    "build": "babel src --presets babel-preset-es2015 --out-dir dist"
+    "build": "babel src --presets babel-preset-es2015 --out-dir dist",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
