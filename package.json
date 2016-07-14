@@ -1,5 +1,5 @@
 {
-  "name": "tracker-redux",
+  "name": "tracker-react-redux",
   "version": "1.0.0",
   "description": "Use React Redux with Meteor's Tracker",
   "repository": {
