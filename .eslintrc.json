@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "standard",
+    "plugin:react/recommended"
+  ],
+  "installedESLint": true,
+  "plugins": [
+    "standard",
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  }
+}
