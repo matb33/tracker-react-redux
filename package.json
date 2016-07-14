@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Use React Redux with Meteor's Tracker",
   "main": "dist/index.js",
+  "files": [
+    "dist/native.js"
+  ],
   "scripts": {
     "build": "babel src --presets babel-preset-es2015 --out-dir dist"
   },
