@@ -1,6 +1,9 @@
 import createTrackerManagerCreator from './createTrackerManagerCreator'
 import connect from './connect'
 
-export { createTrackerManagerCreator }
+const boundConnect = connect.bind(undefined, createTrackerManagerCreator)
 
-export default connect.bind(undefined, createTrackerManagerCreator)
+export { createTrackerManagerCreator }
+export { boundConnect as connect }
+
+export default boundConnect
