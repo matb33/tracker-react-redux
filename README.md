@@ -1,6 +1,6 @@
 # Tracker React Redux
 
-Use [React Redux](https://github.com/reactjs/react-redux) with Meteor [Tracker](http://docs.meteor.com/api/tracker.html). [React Native Meteor](https://github.com/inProgress-team/react-native-meteor) is also supported.
+Use [React Redux](https://github.com/reactjs/react-redux) with [Meteor Tracker](http://docs.meteor.com/api/tracker.html). [React Native Meteor](https://github.com/inProgress-team/react-native-meteor) is also supported.
 
 ## Installation
 
