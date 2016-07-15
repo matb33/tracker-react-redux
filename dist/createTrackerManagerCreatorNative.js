@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = connectTrackerReduxNative;
+exports.default = createTrackerManagerCreatorNative;
 
 var _reactNativeMeteor = require('react-native-meteor');
 
-function connectTrackerReduxNative(store) {
+function createTrackerManagerCreatorNative(store) {
   // Check store for a valid shape
   if (!store.subscribe || !store.dispatch || !store.getState) {
     return false;

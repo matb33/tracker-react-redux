@@ -1,8 +1,10 @@
+import { connect } from 'react-redux'
+
 function getDisplayName (WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component'
 }
 
-export default function createTrackerReduxContainer (connectTrackerRedux, WrappedComponent, trackersFn = null) {
+function createTrackerReduxContainer (createTrackerManagerCreator, WrappedComponent, trackersFn = null) {
   const displayName = `createTrackerReduxContainer(${getDisplayName(WrappedComponent)})`
 
   return class TrackerReduxContainer extends WrappedComponent {
@@ -25,27 +27,37 @@ export default function createTrackerReduxContainer (connectTrackerRedux, Wrappe
     componentWillMount () {
       super.componentWillMount && super.componentWillMount()
 
-      let createTrackerRedux = connectTrackerRedux(this.store)
+      let createTrackerManager = createTrackerManagerCreator(this.store)
 
-      if (createTrackerRedux) {
-        this.trackerRedux = createTrackerRedux()
-        trackersFn && trackersFn(this.trackerRedux, this.props)
+      if (createTrackerManager) {
+        this.trackerManager = createTrackerManager()
+        trackersFn && trackersFn(this.trackerManager.track, this.props)
       }
     }
     componentWillReceiveProps (newProps) {
       super.componentWillReceiveProps && super.componentWillReceiveProps(newProps)
 
-      if (this.trackerRedux) {
-        this.trackerRedux.dispose()
-        trackersFn && trackersFn(this.trackerRedux, newProps)
+      if (this.trackerManager) {
+        this.trackerManager.dispose()
+        trackersFn && trackersFn(this.trackerManager.track, newProps)
       }
     }
     componentWillUnmount () {
-      if (this.trackerRedux) {
-        this.trackerRedux.dispose()
+      if (this.trackerManager) {
+        this.trackerManager.dispose()
       }
 
       super.componentWillUnmount && super.componentWillUnmount()
     }
+  }
+}
+
+export default function (createTrackerManagerCreator, trackersFn, mapStateToProps, mapDispatchToProps, mergeProps, options = {}) {
+  return function (WrappedComponent) {
+    return createTrackerReduxContainer(
+      createTrackerManagerCreator,
+      connect(mapStateToProps, mapDispatchToProps, mergeProps, options)(WrappedComponent),
+      trackersFn
+    )
   }
 }

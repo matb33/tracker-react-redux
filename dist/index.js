@@ -3,17 +3,17 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.connectTrackerRedux = undefined;
+exports.createTrackerManagerCreator = undefined;
 
-var _connectTrackerRedux = require('./connectTrackerRedux');
+var _createTrackerManagerCreator = require('./createTrackerManagerCreator');
 
-var _connectTrackerRedux2 = _interopRequireDefault(_connectTrackerRedux);
+var _createTrackerManagerCreator2 = _interopRequireDefault(_createTrackerManagerCreator);
 
-var _createTrackerReduxContainer = require('./createTrackerReduxContainer');
+var _connect = require('./connect');
 
-var _createTrackerReduxContainer2 = _interopRequireDefault(_createTrackerReduxContainer);
+var _connect2 = _interopRequireDefault(_connect);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.connectTrackerRedux = _connectTrackerRedux2.default;
-exports.default = _createTrackerReduxContainer2.default.bind(undefined, _connectTrackerRedux2.default);
+exports.createTrackerManagerCreator = _createTrackerManagerCreator2.default;
+exports.default = _connect2.default.bind(undefined, _createTrackerManagerCreator2.default);

@@ -8,7 +8,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-exports.default = createTrackerReduxContainer;
+exports.default = function (createTrackerManagerCreator, trackersFn, mapStateToProps, mapDispatchToProps, mergeProps) {
+  var options = arguments.length <= 5 || arguments[5] === undefined ? {} : arguments[5];
+
+  return function (WrappedComponent) {
+    return createTrackerReduxContainer(createTrackerManagerCreator, (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps, mergeProps, options)(WrappedComponent), trackersFn);
+  };
+};
+
+var _reactRedux = require('react-redux');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -20,7 +28,7 @@ function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
-function createTrackerReduxContainer(connectTrackerRedux, WrappedComponent) {
+function createTrackerReduxContainer(createTrackerManagerCreator, WrappedComponent) {
   var trackersFn = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
   var displayName = 'createTrackerReduxContainer(' + getDisplayName(WrappedComponent) + ')';
@@ -48,11 +56,11 @@ function createTrackerReduxContainer(connectTrackerRedux, WrappedComponent) {
       value: function componentWillMount() {
         _get(Object.getPrototypeOf(TrackerReduxContainer.prototype), 'componentWillMount', this) && _get(Object.getPrototypeOf(TrackerReduxContainer.prototype), 'componentWillMount', this).call(this);
 
-        var createTrackerRedux = connectTrackerRedux(this.store);
+        var createTrackerManager = createTrackerManagerCreator(this.store);
 
-        if (createTrackerRedux) {
-          this.trackerRedux = createTrackerRedux();
-          trackersFn && trackersFn(this.trackerRedux, this.props);
+        if (createTrackerManager) {
+          this.trackerManager = createTrackerManager();
+          trackersFn && trackersFn(this.trackerManager.track, this.props);
         }
       }
     }, {
@@ -60,16 +68,16 @@ function createTrackerReduxContainer(connectTrackerRedux, WrappedComponent) {
       value: function componentWillReceiveProps(newProps) {
         _get(Object.getPrototypeOf(TrackerReduxContainer.prototype), 'componentWillReceiveProps', this) && _get(Object.getPrototypeOf(TrackerReduxContainer.prototype), 'componentWillReceiveProps', this).call(this, newProps);
 
-        if (this.trackerRedux) {
-          this.trackerRedux.dispose();
-          trackersFn && trackersFn(this.trackerRedux, newProps);
+        if (this.trackerManager) {
+          this.trackerManager.dispose();
+          trackersFn && trackersFn(this.trackerManager.track, newProps);
         }
       }
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
-        if (this.trackerRedux) {
-          this.trackerRedux.dispose();
+        if (this.trackerManager) {
+          this.trackerManager.dispose();
         }
 
         _get(Object.getPrototypeOf(TrackerReduxContainer.prototype), 'componentWillUnmount', this) && _get(Object.getPrototypeOf(TrackerReduxContainer.prototype), 'componentWillUnmount', this).call(this);

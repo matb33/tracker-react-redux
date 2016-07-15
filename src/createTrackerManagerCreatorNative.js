@@ -1,6 +1,6 @@
 import { getData, Tracker } from 'react-native-meteor'
 
-export default function connectTrackerReduxNative (store) {
+export default function createTrackerManagerCreatorNative (store) {
   // Check store for a valid shape
   if (!store.subscribe || !store.dispatch || !store.getState) {
     return false

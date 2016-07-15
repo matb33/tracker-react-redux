@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = connectTrackerRedux;
+exports.default = createTrackerManagerCreator;
 
 var _tracker = require('meteor/tracker');
 
-function connectTrackerRedux(store) {
+function createTrackerManagerCreator(store) {
   // Check store for a valid shape
   if (!store.subscribe || !store.dispatch || !store.getState) {
     return false;

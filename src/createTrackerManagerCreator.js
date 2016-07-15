@@ -1,6 +1,6 @@
 import { Tracker } from 'meteor/tracker'
 
-export default function connectTrackerRedux (store) {
+export default function createTrackerManagerCreator (store) {
   // Check store for a valid shape
   if (!store.subscribe || !store.dispatch || !store.getState) {
     return false

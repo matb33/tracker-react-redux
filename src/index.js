@@ -1,6 +1,6 @@
-import connectTrackerRedux from './connectTrackerRedux'
-import createTrackerReduxContainer from './createTrackerReduxContainer'
+import createTrackerManagerCreator from './createTrackerManagerCreator'
+import connect from './connect'
 
-export { connectTrackerRedux }
+export { createTrackerManagerCreator }
 
-export default createTrackerReduxContainer.bind(undefined, connectTrackerRedux)
+export default connect.bind(undefined, createTrackerManagerCreator)
