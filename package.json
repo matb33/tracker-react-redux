@@ -4,6 +4,10 @@
   "description": "Use React Redux with Meteor's Tracker",
   "main": "dist/index.js",
   "files": [
+    "dist/connect.js",
+    "dist/createTrackerManagerCreator.js",
+    "dist/createTrackerManagerCreatorNative.js",
+    "dist/index.js",
     "native.js"
   ],
   "scripts": {
