@@ -14,4 +14,4 @@ var connect = require('./dist/connect')
 var connectInterop = interopRequireDefault(connect)
 
 exports.createTrackerManagerCreatorNative = createTrackerManagerCreatorNativeInterop.default
-exports.default = exports.connect = connectInterop.default.bind(undefined, connectInterop.default)
+exports.default = exports.connect = connectInterop.default.bind(undefined, createTrackerManagerCreatorNativeInterop.default)
